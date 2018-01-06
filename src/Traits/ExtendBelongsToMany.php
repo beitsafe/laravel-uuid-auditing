@@ -1,10 +1,9 @@
 <?php
 
-namespace BeITSafe\Laravel\UUIDAuditing\Traits;
+namespace BeITSafe\Laravel\Traits;
 
-use BeITSafe\Laravel\UUIDAuditing\Relations\BelongsToManyBeITSafe;
+use BeITSafe\Laravel\Relations\BelongsToManyBeITSafe;
 use Fico7489\Laravel\Pivot\Traits\PivotEventTrait;
-use Webpatser\Uuid\Uuid;
 
 trait ExtendBelongsToMany
 {

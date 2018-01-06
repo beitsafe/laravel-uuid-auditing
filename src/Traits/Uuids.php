@@ -1,9 +1,7 @@
 <?php
 
-namespace BeITSafe\Laravel\UUIDAuditing\Traits;
+namespace BeITSafe\Laravel\Traits;
 
-use BeITSafe\Laravel\UUIDAuditing\Relations\BelongsToManyBeITSafe;
-use BeITSafe\Laravel\UUIDAuditing\Traits\ExtendBelongsToMany;
 use Webpatser\Uuid\Uuid;
 
 trait Uuids

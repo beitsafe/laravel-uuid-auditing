@@ -14,14 +14,29 @@ This package is based on https://github.com/fico7489/laravel-pivot and using web
 composer require beitsafe/laravel-uuid-auditing:"@dev"
 ```
 
-## Configure UUIDs
+## Configure Automatically
 
 
-1.Use BeITSafe\Laravel\UUIDAuditing\Traits\Uuids trait in your base model or only in particular models. This will automatically generate UUIDs for BOTH Models and Pivot Tables.
+1. Use BeITSafe\Laravel\Models\BeITSafeModel trait in your base model or only in particular models. This will automatically generate UUIDs for BOTH Models and Pivot Tables.
 
 ```
 ...
-use BeITSafe\Laravel\UUIDAuditing\Traits\Uuids;
+use BeITSafe\Laravel\Models\BeITSafeModel;
+ 
+class SomeModel extends BeITSafeModel
+{
+...
+```
+
+
+## Configure UUIDs Manually
+
+
+1.Use BeITSafe\Laravel\Traits\Uuids trait in your base model or only in particular models. This will automatically generate UUIDs for BOTH Models and Pivot Tables.
+
+```
+...
+use BeITSafe\Laravel\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseModel extends Model
@@ -30,6 +45,21 @@ abstract class BaseModel extends Model
 ...
 ```
 
+## Configure Auditing Manually
+
+
+1.Use BeITSafe\Laravel\Traits\Auditing trait in your base model or only in particular models. This will automatically save the Auth::user()->id to 'created_by', 'updated_by', 'deleted_by' if there is a logged in User and the column exists in the Model.
+
+```
+...
+use BeITSafe\Laravel\Traits\Auditing;
+use Illuminate\Database\Eloquent\Model;
+
+abstract class BaseModel extends Model
+{
+    use Auditing;
+...
+```
 
 ## New eloquent events
  
