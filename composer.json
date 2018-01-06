@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "BeITSafe\\Laravel\\UUIDAuditing\\": "src"
+            "BeITSafe\\Laravel\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BeITSafe\\Laravel\\UUIDAuditing\\Tests\\": "tests/"
+            "BeITSafe\\Laravel\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
