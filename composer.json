@@ -24,11 +24,9 @@
         }
     ],
     "require": {
-        "illuminate/database": "5.5.*",
         "fico7489/laravel-pivot": "*"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.5.0"
     },
     "autoload": {
         "psr-4": {

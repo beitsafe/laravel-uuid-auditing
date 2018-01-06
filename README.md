@@ -11,7 +11,7 @@ This package is based on https://github.com/fico7489/laravel-pivot
 
 1.Install package with composer
 ```
-composer require beitsafe/laravel-uuid-auditing
+composer require beitsafe/laravel-uuid-auditing:"*"
 ```
 
 
