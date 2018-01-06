@@ -2,6 +2,8 @@
 
 namespace BeITSafe\Laravel\Traits;
 
+use Illuminate\Support\Facades\Schema;
+
 /**
  * Trait Uuids
  * @package App
@@ -20,8 +22,10 @@ trait Auditing
          * for the `created_at` field (if logged in)
          */
         static::creating(function ($model) {
-            if (@\Auth::user()) {
-                $model->created_at = \Auth::user()->id;
+            if (Schema::hasColumn($model->getTable(), 'created_by')) {
+                if (@\Auth::user()) {
+                    $model->created_by = \Auth::user()->id;
+                }
             }
         });
 
@@ -30,8 +34,10 @@ trait Auditing
          * for the `updated_at` field (if logged in)
          */
         static::updating(function ($model) {
-            if (@\Auth::user()) {
-                $model->updating_at = \Auth::user()->id;
+            if (Schema::hasColumn($model->getTable(), 'updated_by')) {
+                if (@\Auth::user()) {
+                    $model->updated_by = \Auth::user()->id;
+                }
             }
         });
 
@@ -40,9 +46,10 @@ trait Auditing
          * for the `deleted_at` field (if logged in)
          */
         static::deleting(function ($model) {
-            if (property_exists($model, 'deleted_at')) {
+            if (Schema::hasColumn($model->getTable(), 'deleted_by')) {
                 if (@\Auth::user()) {
-                    $model->deleting_at = \Auth::user()->id;
+                    $model->deleted_by = \Auth::user()->id;
+                    $model->save();
                 }
             }
         });
