@@ -4,27 +4,29 @@ This package adds Traits for generating UUIDs and filling audit columns on Model
 
 ## Based On
 
-This package is based on https://github.com/fico7489/laravel-pivot
+This package is based on https://github.com/fico7489/laravel-pivot and using webpatser/laravel-uuid
 
 
 ## Install
 
 1.Install package with composer
 ```
-composer require beitsafe/laravel-uuid-auditing:"*"
+composer require beitsafe/laravel-uuid-auditing:"@dev"
 ```
 
+## Configure UUIDs
 
-2.Use Fico7489\Laravel\Pivot\Traits\PivotEventTrait trait in your base model or only in particular models.
+
+1.Use BeITSafe\Laravel\UUIDAuditing\Traits\Uuids trait in your base model or only in particular models. This will automatically generate UUIDs for BOTH Models and Pivot Tables.
 
 ```
 ...
-use Fico7489\Laravel\Pivot\Traits\PivotEventTrait;
+use BeITSafe\Laravel\UUIDAuditing\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseModel extends Model
 {
-    use PivotEventTrait;
+    use Uuids;
 ...
 ```
 
