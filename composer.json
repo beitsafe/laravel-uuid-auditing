@@ -1,0 +1,45 @@
+{
+    "name": "beitsafe/laravel-uuid-auditing",
+    "description": "This package adds Traits for generating UUIDs and filling audit columns on Models, extends fico7489/laravel-pivot to add UUIDs to Pivot Tables",
+    "keywords": [
+        "laravel pivot UUIDS",
+        "laravel BelongsToMany events",
+        "eloquent extra events",
+        "laravel pivot events",
+        "laravel sync events",
+        "eloquent events"
+    ],
+    "homepage": "https://github.com/beitsafe/laravel-uuid-auditing",
+    "support": {
+        "issues": "https://github.com/beitsafe/laravel-uuid-auditing/issues",
+        "source": "https://github.com/beitsafe/laravel-uuid-auditing"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "BE IT SAFE PTY LTD",
+            "email": "developers@beitsafe.com",
+            "homepage": "https://beitsafe.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "illuminate/database": "5.5.*",
+        "fico7489/laravel-pivot": "*",
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BeITSafe\\Laravel\\UUIDAuditing\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BeITSafe\\Laravel\\UUIDAuditing\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
