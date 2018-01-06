@@ -21,7 +21,7 @@ class BeITSafeModel extends Model
      */
     public function creator()
     {
-        return $this->belongsTo('App\User', 'created_by');
+        return $this->belongsTo('App\Models\User', 'created_by');
     }
 
     /**
@@ -31,7 +31,7 @@ class BeITSafeModel extends Model
      */
     public function updator()
     {
-        return $this->belongsTo('App\User', 'updated_by');
+        return $this->belongsTo('App\Models\User', 'updated_by');
     }
 
     /**
@@ -41,6 +41,6 @@ class BeITSafeModel extends Model
      */
     public function deletor()
     {
-        return $this->belongsTo('App\User', 'deleted_by');
+        return $this->belongsTo('App\Modes\User', 'deleted_by');
     }
 }
