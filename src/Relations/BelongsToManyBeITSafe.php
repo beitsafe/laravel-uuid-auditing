@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Fico7489\Laravel\Pivot\Relations\BelongsToManyCustom;
+use Illuminate\Support\Facades\Schema;
 
 class BelongsToManyBeITSafe extends BelongsToManyCustom
 {
@@ -28,9 +29,37 @@ class BelongsToManyBeITSafe extends BelongsToManyCustom
     {
         list($idsOnly, $idsAttributes) = $this->getIdsWithAttributes($ids, $attributes);
 
+        $this->attributes = $attributes;
+
         $this->parent->fireModelEvent('pivotAttaching', true, $this, $idsOnly, $idsAttributes);
         BelongsToMany::attach($ids, $this->attributes, $touch);
         $this->parent->fireModelEvent('pivotAttached', false, $this, $idsOnly, $idsAttributes);
+    }
+
+    /**
+     * Detach models from the relationship.
+     *
+     * @param  mixed  $ids
+     * @param  bool  $touch
+     * @return int
+     */
+    public function detach($ids = [], $touch = true)
+    {
+        list($idsOnly) = $this->getIdsWithAttributes($ids);
+
+        $this->parent->fireModelEvent('pivotDetaching', true, $this, $idsOnly);
+        if (Schema::hasColumn($this->getTable(), 'deleted_at')) {
+            if (is_array($ids)) {
+                foreach($ids as $id) {
+                    $this->updateExistingPivot($id, $this->attributes, false);
+                }
+            } else {
+                $this->updateExistingPivot($ids, $this->attributes, false);
+            }
+        } else {
+            BelongsToMany::detach($ids, $touch);
+        }
+        $this->parent->fireModelEvent('pivotDetached', false, $this, $idsOnly);
     }
 
     /**
@@ -44,6 +73,8 @@ class BelongsToManyBeITSafe extends BelongsToManyCustom
     public function updateExistingPivot($id, array $attributes, $touch = true)
     {
         list($idsOnly, $idsAttributes) = $this->getIdsWithAttributes($id, $attributes);
+
+        $this->attributes = $attributes;
 
         $this->parent->fireModelEvent('pivotUpdating', true, $this, $idsOnly, $idsAttributes);
         BelongsToMany::updateExistingPivot($id, $this->attributes, $touch);
