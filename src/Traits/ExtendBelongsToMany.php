@@ -3,7 +3,9 @@
 namespace BeITSafe\Laravel\Traits;
 
 use BeITSafe\Laravel\Relations\BelongsToManyBeITSafe;
+use BeITSafe\Laravel\Relations\MorphToManyBeITSafe;
 use Fico7489\Laravel\Pivot\Traits\PivotEventTrait;
+use Illuminate\Support\Str;
 
 trait ExtendBelongsToMany
 {
@@ -47,6 +49,33 @@ trait ExtendBelongsToMany
             $instance->newQuery(), $this, $table, $foreignPivotKey,
             $relatedPivotKey, $parentKey ?: $this->getKeyName(),
             $relatedKey ?: $instance->getKeyName(), $relation
+        );
+    }
+
+    public function morphToMany($related, $name, $table = null, $foreignPivotKey = null,
+                                $relatedPivotKey = null, $parentKey = null,
+                                $relatedKey = null, $inverse = false)
+    {
+        $caller = $this->guessBelongsToManyRelation();
+
+        // First, we will need to determine the foreign key and "other key" for the
+        // relationship. Once we have determined the keys we will make the query
+        // instances, as well as the relationship instances we need for these.
+        $instance = $this->newRelatedInstance($related);
+
+        $foreignPivotKey = $foreignPivotKey ?: $name.'_id';
+
+        $relatedPivotKey = $relatedPivotKey ?: $instance->getForeignKey();
+
+        // Now we're ready to create a new query builder for this related model and
+        // the relationship instances for this relation. This relations will set
+        // appropriate query constraints then entirely manages the hydrations.
+        $table = $table ?: Str::plural($name);
+
+        return new MorphToManyBeITSafe(
+            $instance->newQuery(), $this, $name, $table,
+            $foreignPivotKey, $relatedPivotKey, $parentKey ?: $this->getKeyName(),
+            $relatedKey ?: $instance->getKeyName(), $caller, $inverse
         );
     }
 }
