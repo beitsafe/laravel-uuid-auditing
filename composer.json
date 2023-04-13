@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "fico7489/laravel-pivot": "*",
+        "fico7489/laravel-pivot": "^3.0",
         "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
