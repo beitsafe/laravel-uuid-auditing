@@ -4,7 +4,7 @@ This package adds Traits for generating UUIDs and filling audit columns on Model
 
 ## Based On
 
-This package is based on https://github.com/fico7489/laravel-pivot and using webpatser/laravel-uuid
+This package is based on https://github.com/fico7489/laravel-pivot
 
 
 ## Install

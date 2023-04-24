@@ -2,7 +2,7 @@
 
 namespace BeITSafe\Laravel\Traits;
 
-use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 trait Uuids
 {
@@ -21,7 +21,7 @@ trait Uuids
          * for the `id` field (provided by $model->getKeyName())
          */
         static::creating(function ($model) {
-            $model->{$model->getKeyName()} = (string)Uuid::generate();
+            $model->{$model->getKeyName()} = Str::uuid()->toString();
         });
 
         /**
@@ -29,7 +29,7 @@ trait Uuids
          * for the `id` field (provided by $model->getKeyName())
          */
         static::pivotAttaching(function ($model, $pivotRelation, $pivotIds, $pivotIdsAttributes) {
-            $pivotRelation->attributes['id'] = (string)Uuid::generate();
+            $pivotRelation->attributes['id'] = Str::uuid()->toString();
         });
 
     }
