@@ -54,10 +54,8 @@ trait ExtendBelongsToMany
 
     public function morphToMany($related, $name, $table = null, $foreignPivotKey = null,
                                 $relatedPivotKey = null, $parentKey = null,
-                                $relatedKey = null, $inverse = false)
+                                $relatedKey = null, $relation = null, $inverse = false)
     {
-        $caller = $this->guessBelongsToManyRelation();
-
         // First, we will need to determine the foreign key and "other key" for the
         // relationship. Once we have determined the keys we will make the query
         // instances, as well as the relationship instances we need for these.
@@ -75,7 +73,7 @@ trait ExtendBelongsToMany
         return new MorphToManyBeITSafe(
             $instance->newQuery(), $this, $name, $table,
             $foreignPivotKey, $relatedPivotKey, $parentKey ?: $this->getKeyName(),
-            $relatedKey ?: $instance->getKeyName(), $caller, $inverse
+            $relatedKey ?: $instance->getKeyName(), $relation, $inverse
         );
     }
 }
